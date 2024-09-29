@@ -102,6 +102,7 @@ model Project {
   orders         Order[]
   invoices       Invoice[]
   documents      Document[]
+  accessId       String?      @unique @default(cuid())
 }
 
 model Order {
