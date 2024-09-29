@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Agency Client Portal
 
-## Getting Started
+An open-source client portal solution for agencies to manage projects, communicate with clients, and streamline workflows.
 
-First, run the development server:
+## Introduction
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Agency Client Portal is a powerful, customizable web application designed to help agencies improve client communication, project management, and overall efficiency. Built with modern web technologies, it offers a seamless experience for both agencies and their clients.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Key features:
+- Project management dashboard
+- Client communication tools
+- File sharing and collaboration
+- Task tracking and assignment
+- Customizable branding options
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Setup and Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Prerequisites
 
-## Learn More
+- Node.js (v14 or later)
+- npm or yarn
+- PostgreSQL database
+- SMTP server for email notifications
 
-To learn more about Next.js, take a look at the following resources:
+### Installation Steps
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/harishdeivanayagam/agencykit.git
+   cd agency-client-portal
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+3. Set up environment variables:
+   Copy the `.env.example` file to `.env` and update the values with your configuration.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Run database migrations:
+   ```bash
+   npm run migrate
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+6. Open your browser and navigate to `http://localhost:3000` to access the application.
+
+## Database and Email Configuration
+
+### PostgreSQL Setup
+
+1. Install PostgreSQL on your system if not already installed.
+2. Create a new database for the project.
+3. Update the `DATABASE_URL` in your `.env` file with the connection string for your PostgreSQL database.
+
+### SMTP Configuration
+
+1. Set up an SMTP server or use a service like SendGrid, Mailgun, or Amazon SES.
+2. Update the following variables in your `.env` file:
+   ```bash
+   SMTP_HOST=your_smtp_host
+   SMTP_PORT=your_smtp_port
+   SMTP_USER=your_smtp_username
+   SMTP_PASSWORD=your_smtp_password
+   ```
+
+## Contributing
+
+We welcome contributions to the Agency Client Portal project. Please read our [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines on how to submit pull requests, report issues, and suggest improvements.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Copyright
+
+Copyright (c) 2024 Harish Deivanayagam. All rights reserved.
