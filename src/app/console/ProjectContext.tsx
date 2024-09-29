@@ -6,6 +6,7 @@ import { fetchProjects } from './actions'
 interface Project {
     id: string
     name: string
+    accessId: string | null
 }
 
 interface ProjectContextType {

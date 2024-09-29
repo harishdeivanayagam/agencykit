@@ -57,6 +57,7 @@ export default function OrdersTable({ orders, onOrderUpdated }: OrdersTableProps
               </TableCell>
             </TableRow>
           ))}
+          {orders.length === 0 && <TableRow><TableCell colSpan={8}>No orders found</TableCell></TableRow>}
         </TableBody>
       </Table>
       {editingOrder && (

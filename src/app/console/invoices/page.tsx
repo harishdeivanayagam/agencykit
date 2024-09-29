@@ -90,6 +90,7 @@ export default function InvoicesPage() {
                             </TableCell>
                         </TableRow>
                     ))}
+                    {invoices.length === 0 && <TableRow><TableCell colSpan={6}>No invoices found</TableCell></TableRow>}
                 </TableBody>
             </Table>
         </div>

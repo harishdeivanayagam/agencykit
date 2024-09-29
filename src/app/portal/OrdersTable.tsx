@@ -18,6 +18,7 @@ export function OrdersTable({ orders }: { orders: any[] }) {
                         <TableCell>{order.status}</TableCell>
                     </TableRow>
                 ))}
+                {orders.length === 0 && <TableRow><TableCell colSpan={3}>No orders found</TableCell></TableRow>}
             </TableBody>
         </Table>
     )

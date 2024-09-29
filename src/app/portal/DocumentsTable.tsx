@@ -27,6 +27,7 @@ export function DocumentsTable({ documents, canUpload = false }: { documents: an
                         </TableCell>
                     </TableRow>
                 ))}
+                {documents.length === 0 && <TableRow><TableCell colSpan={4}>No documents found</TableCell></TableRow>}
             </TableBody>
         </Table>
     )

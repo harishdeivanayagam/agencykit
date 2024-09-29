@@ -195,6 +195,7 @@ export default function ClientsTable({ clients, onClientUpdated }: ClientsTableP
                             </TableCell>
                         </TableRow>
                     ))}
+                    {clients.length === 0 && <TableRow><TableCell colSpan={10}>No clients found</TableCell></TableRow>}
                 </TableBody>
             </Table>
         </div>
