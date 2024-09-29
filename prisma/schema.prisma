@@ -1,0 +1,150 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  MEMBER
+}
+
+enum Status {
+  PENDING
+  SUBMITTED
+  WORKING
+  COMPLETED
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum DocumentRequestor {
+  CLIENT
+  AGENCY
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PAID
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  otp           String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  members       Member[]
+  orders        Order[]
+}
+
+model Organization {
+  id        String     @id @default(cuid())
+  name      String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  members   Member[]
+  projects  Project[]
+  orders    Order[]
+  clients   Client[]
+  invoices  Invoice[]
+  document  Document[]
+}
+
+model Member {
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  userId         String
+  user           User         @relation(fields: [userId], references: [id])
+  role           Role
+
+  @@id([userId, organizationId])
+}
+
+model Client {
+  id             String       @id @default(cuid())
+  name           String
+  email          String
+  phone          String
+  website        String
+  address        String
+  city           String
+  state          String
+  zip            String
+  country        String
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  projects       Project[]
+  invoices       Invoice[]
+}
+
+model Project {
+  id             String       @id @default(cuid())
+  name           String
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  clientId       String
+  client         Client       @relation(fields: [clientId], references: [id])
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  orders         Order[]
+  invoices       Invoice[]
+  documents      Document[]
+}
+
+model Order {
+  id             String       @id @default(cuid())
+  name           String
+  description    String
+  status         Status
+  dueDate        DateTime
+  priority       Priority
+  assignedToId   String
+  assignedTo     User         @relation(fields: [assignedToId], references: [id])
+  projectId      String
+  project        Project      @relation(fields: [projectId], references: [id])
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+}
+
+model Document {
+  id             String            @id @default(cuid())
+  name           String
+  requestor      DocumentRequestor
+  url            String
+  organizationId String
+  organization   Organization      @relation(fields: [organizationId], references: [id])
+  projectId      String
+  project        Project           @relation(fields: [projectId], references: [id])
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+}
+
+model Invoice {
+  id             String        @id @default(cuid())
+  name           String        @default("Untitled Invoice")
+  organizationId String
+  organization   Organization  @relation(fields: [organizationId], references: [id])
+  projectId      String
+  project        Project       @relation(fields: [projectId], references: [id])
+  clientId       String
+  client         Client        @relation(fields: [clientId], references: [id])
+  data           Json?
+  status         InvoiceStatus @default(DRAFT)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
