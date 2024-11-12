@@ -79,4 +79,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Copyright
 
-Copyright (c) 2024 Harish Deivanayagam. All rights reserved.
+Copyright (c) 2024-2025 Harish Deivanayagam. All rights reserved.
